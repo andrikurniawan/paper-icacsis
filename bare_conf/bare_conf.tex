@@ -355,7 +355,7 @@
 \IEEEauthorblockA{Faculty of Computer Science\\
 Universitas Indonesia\\
 West Java, Indonesia\\
-Email: andrikurniawan.id@gmail.com}
+Email: andri.kurniawan31@ui.ac.id}
 \and
 \IEEEauthorblockN{Iis Afriyanti}
 \IEEEauthorblockA{Faculty of Computer Science\\
@@ -584,6 +584,22 @@ In the previous study \cite{bravyto} the business logic of the system is impleme
 
 
 \section{Running Example: BSMI}
+
+%intro BSMI
+BSMI (Bulan Sabit Merah Indonesia) is a charity organization that works to help others in Indonesia. To make it easier for the community to participate in providing assistance through BSMI, BSMI needs a website that can facilitate them in their operations. In this paper, we employ BSMI as a running example to demonstrate the adaptor and its usage and also linked data.
+
+% ontologi BSMI, rules
+BSMI has many features, but in this paper we focus on using program features, donation features, target features, and donor features only. Program features are activities undertaken by BSMI. Donation features is a donation given by the community for a program. Donor features are people who donate and target features are target of a program. The features that have been selected have some business logic. For example, between the relationship program and donation is for each program is needed to know how many donations associated with the program. Based on these features, the table mapping rules are generated which contains the endpoint and the number of parameters of the selected feature.
+
+When we open a page containing business logic, it will trigger the adaptor call. In this example, when opening a page with the category of program, total donation of that program will be automatically updated (see fig. \ref{view_program}). If we create a new donation or delete a donation for this program, total donation in this program will be automatically updated.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=3.5in]{19-viewProgram}
+	
+	\caption{View of "Pelantikan dan Seminar BSMI Brebes" program}
+	\label{view_program}
+\end{figure}
 
 \section{Conclusion}
 
