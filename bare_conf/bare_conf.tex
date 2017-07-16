@@ -345,7 +345,7 @@
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
 % Do not put math or special symbols in the title.
-\title{ABS Microservices and Ontology Integration for SPL Implementation in Information System}
+\title{ABS Microservices and Ontology-Zotonic Integration for SPL Implementation in Information System}
 
 
 % author names and affiliations
@@ -427,11 +427,20 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 \section{Introduction} \label{introduction}
 Software Product Line (SPL) gains a huge attention nowadays since it claims that using the paradigm can reduce the cost production, enhance the quality of product, and shorten time of product distribution \cite{pohl:SPLE}. The fundamental key of SPL paradigm is feature model thst is to capture the variabilities and commonalities of different product requirements for different stakeholders; some of previous product components can be used for other requirements. This paradigm has successfully adopted in industry area that several success stories can be found in Product Line Hall of Fame\footnote{http://splc.net/fame.html}. However, to the best of our knowledge, the automated SPL adoption in information system to have the system more adaptable is still inadequate. The main reason is that the feature model as a key part in SPL paradigm can not be executed as it is a model-oriented. Therefore, to realise automated SPL from requirement gathering to deployment phase, we need an executable model such as Abstract Behavioral Specification (ABS).
 
-Abstract Behavioral Specification (ABS) becomes more promising to solve the problem in the SPL since it is a formal modelling language and executable for distributed object-oriented systems \cite{ABS} \cite{ABSTutorial}. The study of ABS Microservices that .... //Papernya Afifun. The feature model is implemented into ABS Microservices and results a web service including the required business logic. The web service supports software development that fits the domain of feature model.
+Abstract Behavioral Specification (ABS) becomes more promising to solve the problem in the SPL. It is a formal modelling language and executable for distributed object-oriented systems \cite{ABS} \cite{ABSTutorial}. The study of ABS Microservices is a framework to accommodate requirement changes in SPL-based system approach \cite{absmc}. The feature model is implemented into ABS Microservices and results a web service including the required business logic. The web service supports software development that meets the domain of feature model.
 
-In addition, the previous study \cite{fmontology} presents the use of OWL ontology as a feature model to produce an application as part of SPL realisation. By using such mechanism, it is possible to conduct inconsistency checking upon the feature model \cite{verify}. The feature model is mapped as \textit{classes} and \textit{data property} of OWL ontology and can be transformed into Zotonic-based information system; a CMS which adopt pragmatic semantic web for its data model. The approach has been already been adopted to automate a charity organization information system \cite{bravyto}. However, the business logic for the system is still manually developed.
+In addition, the previous study \cite{fmontology} presents the use of OWL ontology as a feature model to produce an application as part of SPL realisation. By using such mechanism, it is possible to run inconsistency checking upon the feature model \cite{verify}. The feature model is mapped as \textit{classes} and \textit{data property} of OWL ontology and can be transformed into Zotonic-based information system; a CMS which adopt pragmatic semantic web for its data model. The approach has already been adopted to automate a charity organization information system in \cite{bravyto}. However, the business logic for the system is still manually developed.
 
-Since the web service produced by ABS Microservice provides the business logic and can be retrieved via its web service, we can build an adaptor to integrate web service resulted by ABS Microservice and the Zotonic-based system with ontology inside. Therefore, in this paper we attempt to develop the adaptor, in such a way the information system is semantically structured and the business logic is automatically developed and meets the requirement.
+Since the web service produced by ABS Microservices provides the business logic and can be retrieved via its web service, we can build an adaptor to integrate web service resulted by ABS Microservices and the Zotonic-based system with ontology inside. Therefore, in this paper we attempt to develop the adaptor, in such a way the information system is semantically structured and the business logic is automatically developed and meets the requirement.
+
+The remainder of this paper is structured as follows. Section 2 explains the adaptor along with its implementation process. We provide a case study of the adaptor for a charity organization in Section 3. The last section concludes our work and explain the benefits of the adaptor. 
+
+\section{Related Works}
+SPL becomes a promising paradigm in software development. In recent years, there has been increasing amount of literature on SPL realisation. Some attempts included Semantic Web into SPL process to gain more benefits of the paradigm. In \cite{fmontology} points out that ontology, as a main pillar of Semantic Web, accommodates application realisation production in SPL process with the help of Zotonic; a CMS with pragmatic semantic web for its data model. The study argues that within that it is possible to provide open and reasuable linked data of features.
+
+The approach of study \cite{fmontology} is to translate every feature in the feature model into OWL classes. In addition, the relation between features is converted into OWL object property. 
+
+On the other hand, the development of executable modelling language such as ABS \cite{ABS} also benefits the advancement of SPL. It provides a mechanism to implement the feature diagram into executable codes. A recent study by Afifun \cite{absmc} develops a microservices for ABS modelling language to support requirement changes and product variation in a product line. 
 
 \section{Adaptor for ABS Microservices and Zotonic Integration} 
 The adaptor is specifically built to call the web service produced by ABS Microservices. However, the adaptor needs a list of rules which contains methods along its endpoint in JSON format (see Fig \ref{fig_design}). When accessing a page that has business logic, the template (the template is a template engine\footnote{https://expressjs.com/en/guide/using-template-engines.html} generated by zotonic that has been modified so that it contains business logic) will trigger the model abs to work. The model abs read the rules to identify the endpoint and total parameter in order to check whether the total parameter received is same with the web service requirement. After the model abs gets the endpoint and the number of parameters of the rules, the model abs will send the data to the web service for processing. The full source code of this adaptor can be found in \url{https://gitlab.com/andrikurniawan/adaptor-ontology-to-webservices}.
@@ -583,15 +592,32 @@ In the previous study \cite{bravyto} the business logic of the system is impleme
 \end{figure}
 
 
-\section{Running Example: BSMI}
+\section{Case Study: BSMI Charity Organization}
 
 %intro BSMI
-BSMI (Bulan Sabit Merah Indonesia) is a charity organization that works to help others in Indonesia. To make it easier for the community to participate in providing assistance through BSMI, BSMI needs a website that can facilitate them in their operations. In this paper, we employ BSMI as a running example to demonstrate the adaptor and its usage and also linked data.
+BSMI (Bulan Sabit Merah Indonesia) is a charity organization that works to help others in Indonesia. To make it easier for the community to participate in providing assistance through BSMI, BSMI needs a website that can facilitate them in their operations. In this paper, we employ BSMI as a case study to demonstrate the adaptor and its usage. 
 
-% ontologi BSMI, rules
 BSMI has many features, but in this paper we focus on using program features, donation features, target features, and donor features only. Program features are activities undertaken by BSMI. Donation features is a donation given by the community for a program. Donor features are people who donate and target features are target of a program. The features that have been selected have some business logic. For example, between the relationship program and donation is for each program is needed to know how many donations associated with the program. Based on these features, the table mapping rules are generated which contains the endpoint and the number of parameters of the selected feature.
 
-When we open a page containing business logic, it will trigger the adaptor call. In this example, when opening a page with the category of program, total donation of that program will be automatically updated (see fig. \ref{view_program}). If we create a new donation or delete a donation for this program, total donation in this program will be automatically updated.
+We adopt the ontology generated from the feature diagram in previous study \cite{bravyto} (see Fig. \ref{fig_ontaisco}). We added a list of rules to run the adaptor (see Fig. \ref{fig_rules}). For example, totalDonation is a rule to calculate the total of donation comes to the BSMI website, the endpoint of web service is "http://54.169.128.6:8080/abs/program/totaldonation", and the total parameter is 1. 
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3.5in]{aisco}
+
+\caption{Ontology generated from the feature diagram of charity organization}
+\label{fig_ontaisco}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3.5in]{Rules}
+
+\caption{Example of Rules}
+\label{fig_rules}
+\end{figure}
+
+When we open a page containing business logic, it will trigger the adaptor call. In this example, when opening a page with the category of program, total donation of that program will be automatically updated (see Fig. \ref{view_program}). If we create a new donation or delete a donation for this program, total donation in this program will be automatically updated.
 
 \begin{figure}[h]
 	\centering
@@ -602,7 +628,9 @@ When we open a page containing business logic, it will trigger the adaptor call.
 \end{figure}
 
 \section{Conclusion}
+In this paper we have presented an adaptor to integrate ABS Microservices and the ontology implemented in Zotonic-based information system. We explained the implementation process and show a case study in charity organization by adopting ontology from the previous study. The adaptor reads the \textit{rules} related with the ontology as a mapping table to call the web service. The adaptor can be called by the \textit{template engine} and other \textit{models}.
 
+By utilising this adaptor, the business logic required by the information system can be generated automatically without manual development. In addition, the adaptor facilitates dynamic business logic that meets the requirement of the system. Therefore, we can generate several well-structured web pages with different business logics. Furthermore, we can deliver resources of the system into the web service by calling the adaptor from the models. From this scenario, it became apparent that an external global database can be produced since every information system can transfer its resources to the web service. 
 
 \section*{Acknowledgment}
 This work was fully supported by Reliable Software Engineering (RSE) Laboratory, Fasilkom UI and funded by Universitas Indonesia under Hibah PITTA no. 395/UN2.R3.1/HKP.05.00/2017
@@ -645,7 +673,7 @@ R.~H\"{a}hnle. \textit{The abstract behavioral specification language: A tutoria
 In Formal Methods for Components and Objects, pages 1–37. Springer, 2013.
 
 \bibitem{fmontology}
-I. Afriyanti, F.M. Falakh, A. Azurat and B. Takwa, \textit{Feature Model-to-Ontology for SPL Application Realisation}, submitted to The 18th International Conference on Product-Focused Software Process Improvement. URL: \url{https://drive.google.com/file/d/0B5rTAl7jk81Qcno1ZE9WOXhwdTA/view?usp=sharing}
+I. Afriyanti, F.M. Falakh, A. Azurat and B. Takwa, \textit{Feature Model-to-Ontology for SPL Application Realisation}, submitted to The 18th International Conference on Product-Focused Software Process Improvement. URL: \url{https://arxiv.org/abs/1707.02511}
 
 \bibitem{verify}
 H. H. Wang, Y. F. Li, J. Sun, H. Zhang, and J. Pan, \textit{Verifying feature models using OWL}, Web Semantic, vol. 5, no. 2, pp. 117-129, 2007.
@@ -655,7 +683,7 @@ H. H. Wang, Y. F. Li, J. Sun, H. Zhang, and J. Pan, \textit{Verifying feature mo
 B. T. Pangukir, \textit{Pembentukan Otomatis Aplikasi Berbasis Web dengan Masukan Berupa Ontologi: Status Kasus Web BSMI}
 
 \bibitem{absmc}
-M. A. Naily, M. R. A. Setyautami, R. Muschevici, \textit{Development Framework for Microservices-based Software with Software Product Line Approach Using Abstract Behavioral Specification (ABS) Modeling Language}, to appear in Conference ...
+M. A. Naily, M. R. A. Setyautami, R. Muschevici, \textit{Development Framework for Microservices-based Software with Software Product Line Approach Using Abstract Behavioral Specification (ABS) Modeling Language}, to appear in Microservices: Science and Engineering Workshop co-located with The 15th International Conference on Software Engineering and Formal Methods, Trento, Italy, September 4-8, 2017. 
 
 \end{thebibliography}
 
