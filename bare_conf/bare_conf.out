@@ -1,11 +1,10 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Related Works}{}% 2
-\BOOKMARK [1][-]{section.3}{Adaptor for ABS Microservices and Zotonic Integration}{}% 3
+\BOOKMARK [1][-]{section.3}{Adaptor for ABS Microservices and Ontology-Zotonic Integration}{}% 3
 \BOOKMARK [2][-]{subsection.3.1}{Adaptor Interface}{section.3}% 4
-\BOOKMARK [3][-]{subsubsection.3.1.1}{Calling adaptor through template engine}{subsection.3.1}% 5
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Calling adaptor over template engine}{subsection.3.1}% 5
 \BOOKMARK [3][-]{subsubsection.3.1.2}{Calling adaptor by a model}{subsection.3.1}% 6
 \BOOKMARK [2][-]{subsection.3.2}{Adaptor Implementation}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.3}{Adaptor for Business Logic}{section.3}% 8
-\BOOKMARK [1][-]{section.4}{Case Study: BSMI Charity Organization}{}% 9
-\BOOKMARK [1][-]{section.5}{Conclusion}{}% 10
-\BOOKMARK [1][-]{section*.2}{References}{}% 11
+\BOOKMARK [1][-]{section.4}{Case Study: BSMI Charity Organization}{}% 8
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 9
+\BOOKMARK [1][-]{section*.2}{References}{}% 10

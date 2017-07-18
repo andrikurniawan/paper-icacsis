@@ -425,36 +425,36 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 \IEEEpeerreviewmaketitle
 
 \section{Introduction} \label{introduction}
-Software Product Line (SPL) gains a huge attention nowadays since it claims that using the paradigm can reduce the cost production, enhance the quality of product, and shorten time of product distribution \cite{pohl:SPLE}. The fundamental key of SPL paradigm is feature model thst is to capture the variabilities and commonalities of different product requirements for different stakeholders; some of previous product components can be used for other requirements. This paradigm has successfully adopted in industry area that several success stories can be found in Product Line Hall of Fame\footnote{http://splc.net/fame.html}. However, to the best of our knowledge, the automated SPL adoption in information system to have the system more adaptable is still inadequate. The main reason is that the feature model as a key part in SPL paradigm can not be executed as it is a model-oriented. Therefore, to realise automated SPL from requirement gathering to deployment phase, we need an executable model such as Abstract Behavioral Specification (ABS).
+Software Product Line (SPL) gains a huge attention nowadays since it claims that using the paradigm can reduce the cost production, enhance the quality of product, and shorten time of distribution \cite{pohl:SPLE}. The fundamental key of SPL paradigm is feature model to capture the variabilities and commonalities of different product requirements for different stakeholders; some of previous product components can be used for other requirements. This paradigm has successfully adopted in industry area that several success stories can be found in Product Line Hall of Fame\footnote{http://splc.net/fame.html}. However, to the best of our knowledge, the automated SPL implementation in information system to have the system more adaptable is still inadequate. The main reason is that the feature model as a key part in SPL paradigm can not be executed as it is a model-oriented. Therefore, to realise automated SPL from requirement gathering to deployment phase, we need an executable model such as Abstract Behavioral Specification (ABS).
 
-Abstract Behavioral Specification (ABS) becomes more promising to solve the problem in the SPL. It is a formal modelling language and executable for distributed object-oriented systems \cite{ABS} \cite{ABSTutorial}. The study of ABS Microservices is a framework to accommodate requirement changes in SPL-based system approach \cite{absmc}. The feature model is implemented into ABS Microservices and results a web service including the required business logic. The web service supports software development that meets the domain of feature model.
+ABS becomes more promising to solve the problem in the SPL. It is a formal modelling language and executable for distributed object-oriented systems \cite{ABS}\cite{ABSTutorial}. The study of \cite{absmc} is to create a framework to accommodate requirement changes in SPL-based system by realizing ABS Microservices \cite{absmc}. The feature model is implemented into ABS Microservices and results a web service including the required business logic. The web service supports software development that meets the domain of feature model.
 
-In addition, the previous study \cite{fmontology} presents the use of OWL ontology as a feature model to produce an application as part of SPL realisation. By using such mechanism, it is possible to run inconsistency checking upon the feature model \cite{verify}. The feature model is mapped as \textit{classes} and \textit{data property} of OWL ontology and can be transformed into Zotonic-based information system; a CMS which adopt pragmatic semantic web for its data model. The approach has already been adopted to automate a charity organization information system in \cite{bravyto}. However, the business logic for the system is still manually developed.
+In addition, the previous study \cite{fmontology} presents the use of OWL ontology as a feature model representation to produce an application as part of SPL realization. By using such mechanism, it is possible to run inconsistency checking upon the feature model \cite{verify}. The feature model is mapped into \textit{classes} and \textit{object properties} of OWL ontology and can be transformed into Zotonic-based information system; a CMS which adopt pragmatic semantic web for its data model. The approach has already been adopted to automate a charity organization information system in \cite{bravyto}. However, the business logic for the system is still manually developed.
 
-Since the web service produced by ABS Microservices provides the business logic and can be retrieved via its web service, we can build an adaptor to integrate web service resulted by ABS Microservices and the Zotonic-based system with ontology inside. Therefore, in this paper we attempt to develop the adaptor, in such a way the information system is semantically structured and the business logic is automatically developed and meets the requirement.
+Since the web service produced by ABS Microservices provides business logic for the domain related with the feature model and can be retrieved via its web service, we can build an adaptor to integrate the web service resulted by ABS Microservices and the Zotonic-based system with ontology inside. Therefore, in this paper we attempt to develop the adaptor, in such a way the information system is semantically structured and the business logic is automatically developed and meets the requirement .
 
-The remainder of this paper is structured as follows. Section 2 explains the adaptor along with its implementation process. We provide a case study of the adaptor for a charity organization in Section 3. The last section concludes our work and explain the benefits of the adaptor. 
+The remainder of this paper is structured as follows. Section \ref{relatedworks} describes some studies related with this paper. Section \ref{adaptor} explains the adaptor along with its implementation process. We also provide a case study of the adaptor for a charity organization in Section \ref{casestudy}. The last section concludes our work and explain the benefits of the adaptor. 
 
-\section{Related Works}
+\section{Related Works} \label{relatedworks}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=3.5in]{overallsysdes}
 
-\caption{SPL Adoption for Information System}
+\caption{Architectural Design SPL-based Information System}
 \label{fig_sysdes}
 \end{figure}
 
-SPL becomes a promising paradigm in software development. In recent years, there has been increasing amount of literature on SPL realisation. Some attempts included Semantic Web into SPL process to gain more benefits of the paradigm. In \cite{fmontology} points out that ontology, as a main pillar of Semantic Web, accommodates application realisation production in SPL process with the help of Zotonic; a CMS with pragmatic semantic web for its data model. The study argues that within that it is possible to provide open and reasuable linked data of features.
+SPL becomes a promising paradigm in software development. In recent years, there has been increasing amount of literature on SPL realisation. Some attempts utilize Semantic Web in SPL process to gain more benefits of the paradigm. In \cite{fmontology} points out that ontology, as a main pillar of Semantic Web, accommodates application realisation production in SPL process with the help of Zotonic; a CMS with pragmatic semantic web for its data model. The study argues that within that it is possible to provide open and reasuable linked data of features.
 
-The approach of study \cite{fmontology} is to translate every feature in the feature model into OWL classes. In addition, the relation between features is converted into OWL object property. The translation is implemented in Zotonic with BSMI charity organization as a case study. Each OWL class is implemented into Category and OWL Object Property is into Predicate. The translation from OWL class and object properties runs automatically and results an information system. However, the system requires some business logic to be implemented.
+The approach of study \cite{fmontology} is to translate every feature in the feature model into OWL classes. In addition, the relation between features is converted into OWL object property. The translation is implemented in Zotonic with BSMI charity organization as a case study (see Fig. \ref{fig_sysdes}). Each OWL class and object property are subsequently mapped into \textit{Category} and \textit{Predicate} of Zotonic system. The translation from OWL class and object properties runs automatically and results an information system. However, the system requires some business logic to be implemented, such as the total donation for charity organization system. In the previous study \cite{bravyto} the business logic of the system is implemented manually in Javascript. Although, business logic on one charity organizational with another may vary. 
 
-On the other hand, the development of executable modelling language such as ABS \cite{ABS} also benefits the advancement of SPL. It provides a mechanism to implement the feature diagram into executable codes. A recent study by Afifun \cite{absmc} develops a microservices for ABS modelling language to support requirement changes and product variation in a product line. The microservices can also provide some business logic for the domain described in the feature model. We also can generate the web service from the microservices if it is in demand.
+On the other hand, the development of executable modelling language such as ABS \cite{ABS} also benefits the advancement of SPL. It provides a mechanism to implement the feature diagram into executable codes. A recent study by Afifun \cite{absmc} develops a microservices for ABS modelling language to support requirement changes and product variabilities in a product line. The microservices can also provide some business logic for the domain described in the feature model.
 
-Thus, we attempt to implement a bridge between the web service produced 
+Thus, we attempt to implement an adaptor to integrate the ABS Microservices and Zotonic system that already included ontology of feature diagram as shown in Fig. \ref{fig_sysdes}. We employ Zotonic and the ontology as a representation of a feature model is mapped into Zotonic data model. Moreover, the adaptor employs the rules and the web service to provide business logic for the information system. By using the adaptor, the business logic required by the system will be retrieved from the web service, for example to calculate the total of donation for a certain charity program.
 
-\section{Adaptor for ABS Microservices and Zotonic Integration} 
-The adaptor is specifically built to call the web service produced by ABS Microservices. However, the adaptor needs a list of rules which contains methods along its endpoint in JSON format (see Fig \ref{fig_design}). When accessing a page that has business logic, the template (the template is a template engine\footnote{https://expressjs.com/en/guide/using-template-engines.html} generated by zotonic that has been modified so that it contains business logic) will trigger the model abs to work. The model abs read the rules to identify the endpoint and total parameter in order to check whether the total parameter received is same with the web service requirement. After the model abs gets the endpoint and the number of parameters of the rules, the model abs will send the data to the web service for processing. The full source code of this adaptor can be found in \url{https://gitlab.com/andrikurniawan/adaptor-ontology-to-webservices}.
+\section{Adaptor for ABS Microservices and Ontology-Zotonic Integration} \label{adaptor}
+The adaptor is specifically built to call the web service produced by ABS Microservices. However, the adaptor needs a rules table which contains a list of methods along its endpoints in JSON format (see Fig \ref{fig_design}). When accessing a page that has business logic, the template engine generated by Zotonic which contains business logics will triggers the \textit{m\_abs} as illustrated in Fig. \ref{fig_design}. The m\_abs reads the rules table to identify the endpoint and total parameter in order to check whether the total parameter received is equalt to the web service requirement. Afterwards, the m\_abs will send the data to the web service to be processed. The full source code of this adaptor implementation can be found in \url{https://gitlab.com/andrikurniawan/adaptor-ontology-to-webservices}.
 
 \begin{figure}[h]
 \centering
@@ -475,86 +475,57 @@ The adaptor is specifically built to call the web service produced by ABS Micros
 \subsection{Adaptor Interface}
 The adaptor can be called by two options: \textit{template engine} and a \textit{model}. 
 
-\subsubsection{Calling adaptor through template engine}
+\subsubsection{Calling adaptor over template engine}
 For this reason, we developed a new model inserted in Zotonic installation folder, we named it as m\_abs. Since it is a new model for Zotonic, we need to export the required built in models that is \texttt{m\_find\_value}, \texttt{m\_to\_list} and \texttt{m\_value}. We did not define \texttt{m\_to\_list} and \texttt{m\_value} since they will not be called when the adaptor is running.
 
-However, we specify \texttt{m\_find\_value} to do pattern matching. When the template engine run, it automatically generates some commands structured as \texttt{m.abs.functionName[{query param=value}]} and trigger the adaptor to run. For example \texttt{{{m.abs.totalDonation[{query id=id}]}}} means that it calls function \texttt{m\_abs} in the adaptor for \textit{totalDonation} method or a \textit{key} and \texttt{{query id=id}} is the data which will be delivered to the web service. Both key and data are inputs for the parameters in \texttt{m\_find\_value} function.
-%
-%\begin{lstlisting}[caption=Implementation of m\_find\_value function, label = mfindvalue]
-%% this method to handle call api from template
-%-spec m_find_value(Key, Source, Context) -> 
-%  #m{} | undefined | any() when
-% Key:: integer() | atom() | string(),
-% Source:: #m{},
-% Context:: #context{}.
-%
-%m_find_value(Type, #m{value=undefined} = 
-% M, _Context) -> M#m{value=[Type]};
-% 
-%m_find_value({query, Query}, #m{value=Q} =
-% _, _Context) when is_list(Q) ->
-% [Key] = Q,
-% [Url, Param] = lookup_rules(Key),
-% 
-% case validate_params(Param, Query) of
-%  
-%  false ->
-%   [{error, "Num of Params not same"}];
-%  
-%  true ->
-%   {DecodeJson} = fetch_data(binary_to_list
-%   (Url), jiffy:encode ({Query})),
-%   lager:info("ABS result : ~p", [DecodeJson]),
-%   proplists:get_value(<<"data">>, DecodeJson)
-%
-%end;
-%
-%% Other values won’t be processed
-%m_find_value(_, _, _Context) ->
-% undefined.
+However, we specify \texttt{m\_find\_value} to do pattern matching (see Listing \ref{mfindvalue}). When the template engine runs, it automatically generates some commands structured as \texttt{m.abs.functionName[{query param=value}]} and triggers the adaptor to run. For example \texttt{{{m.abs.totalDonation[{query id=id}]}}} means that it calls function \texttt{m\_abs} in the adaptor for \textit{totalDonation} method or \textit{key} and \texttt{{query id=id}} is the data which will be delivered to the web service. Both \textit{key} and \textit{data} are inputs for the parameters in \texttt{m\_find\_value} function.
 
-%\end{lstlisting}
-%
+\begin{lstlisting}[caption=Implementation of m\_find\_value function, label = mfindvalue]
+m_find_value({query, Query}, #m{value=Q} =
+ _, _Context) when is_list(Q) ->
+ [Key] = Q,
+ [Url, Param] = lookup_rules(Key),
+ 
+ case validate_params(Param, Query) of
+  
+  false ->
+   [{error, "Num of Params not same"}];
+  
+  true ->
+   {DecodeJson} = fetch_data(binary_to_list
+   (Url), jiffy:encode ({Query})),
+   lager:info("ABS result : ~p", [DecodeJson]),
+   proplists:get_value(<<"data">>, DecodeJson)
+
+end;
+\end{lstlisting}
+
 
 \subsubsection{Calling adaptor by a \textit{model}}
-The adaptor is also can be called from other models, such as \texttt{m\_src} model; one of Zotonic built in model. Regarding that requirement, we implemented a new function in the adaptor that is \texttt{call\_api\_controller} which can be accessed by other models. The function receives two paramaters: Key and Data. The Key indicates the method name in the web service and Data is to pass data to the web service. For example, \texttt{m\_abs:call\_api\_controller(deleteDonation, Json);} means that it call function \texttt{call\_api\_controller} in the adaptor for \textit{deleteDonation} method or a key and \texttt{Json} is the data which will be delivered to the web service. One example of using an adapter from another model is to be able to store data from multiple sites that have separate database on zotonic to an external centralized database.
+The adaptor is also can be called from other models, such as \texttt{m\_src} model; one of Zotonic built in model. Regarding that requirement, we implemented a new function in the adaptor that is \texttt{call\_api\_controller} which can be accessed by other models. The function receives two paramaters: \textit{key} and \textit{data}. The \textit{key} indicates the method name in the web service and Data is to pass data to the web service. For example, \texttt{m\_abs:call\_api\_controller(deleteDonation, Json);} means that it calls function \texttt{call\_api\_controller} in the adaptor for \textit{deleteDonation} key and \texttt{Json} is the data which will be delivered to the web service. The benefit of calling the adaptor from another model is to be able to store the data from separate sites to the external centralized database.
 
 
-%\begin{lstlisting}[caption=Implementation of call\_api\_controller, label = callapicont]
-%call_api_controller(Key, Data) ->
-% [Url, Param] = lookup_rules(Key),
-% 
-% case validate_params(Param, Data) of
-%   false ->
-%     [{error, "Num of Params not same"}];
-%   true ->
-%     {DecodeJson} = 
-%       fetch_data(binary_to_list(Url),
-%       jiffy:encode ({Data})),
-%     lager:info("[ABS] result ~p", 
-%       [DecodeJson]),
-%
-% case proplists:get_value(<<"status">>, 
-%   DecodeJson) of 
-%   200 ->
-%     proplists:
-%       get_value(<<"data">>, DecodeJson),
-%   201 ->
-%     Message = proplists:
-%        get_value(<<"message">>, DecodeJson),
-%     lager:info("[ABS] status 201 ~p", 
-%       [binary_to_list(Message)]);
-%   400 ->
-%     Message = proplists:
-%        get_value(<<"message">>, DecodeJson),
-%     lager:error("[ABS] status 400 ~p", 
-%        [Message]);
-%        _Other ->
-%     lager:error("[ABS] status undefined ~p", 
-%        [_Other])
-% end
-%end
-%\end{lstlisting}
+\begin{lstlisting}[caption=Implementation of call\_api\_controller, label = callapicont]
+ case proplists:get_value(<<"status">>, 
+   DecodeJson) of 
+   200 ->
+     proplists:
+       get_value(<<"data">>, DecodeJson),
+   201 ->
+     Message = proplists:
+        get_value(<<"message">>, DecodeJson),
+     lager:info("[ABS] status 201 ~p", 
+       [binary_to_list(Message)]);
+   400 ->
+     Message = proplists:
+        get_value(<<"message">>, DecodeJson),
+     lager:error("[ABS] status 400 ~p", 
+        [Message]);
+        _Other ->
+     lager:error("[ABS] status undefined ~p", 
+        [_Other])
+end
+\end{lstlisting}
 
 \subsection{Adaptor Implementation}
 Aforementioned, the adaptor needs a table of rules. The rules is a JSON format and structured as in Listing \ref{rulestable}. The rules table must be located in root folder of Zotonic. 
@@ -565,7 +536,7 @@ Aforementioned, the adaptor needs a table of rules. The rules is a JSON format a
 }
 \end{lstlisting}
 
-We also implemented \texttt{lookup\_rules} function to read the rules table then returns a list of endpoint and its total of parameter with \textit{key} as an input. The function calls \texttt{read\_file} function which read the whole rules file. The adaptor also run \texttt{validate\_params} function which returns a boolean (see Listing \ref{valparam}). If \textit{true} then the total parameter in rules table is same in the Query where query is data which will be delivered to the web service. If it returns true, the adaptor runs \texttt{fetch\_data} to request data from the web service. 
+We also implemented \texttt{lookup\_rules} function to read the rules table then returns a list of endpoints along with its total of parameters with \textit{key} as an input. The function calls \texttt{read\_file} function which read the whole rules file. The adaptor also run \texttt{validate\_params} function which returns a boolean. If \textit{true} then the total parameter in rules table is same in the Query where query is data which will be delivered to the web service. If it returns true, the adaptor runs \texttt{fetch\_data} to request data from the web service. 
 
 %\begin{lstlisting}[caption=Implementation of validate\_param, label=valparam]
 %validate_params(Param, Query) ->
@@ -591,9 +562,6 @@ post_page_body(Url, Body) ->
 end.
 \end{lstlisting} 
 
-\subsection{Adaptor for Business Logic}
-In the previous study \cite{bravyto} the business logic of the system is implemented manually in Javascript. On the other hand, business logic on one charity organizational with another may be different. By using adapter, business logic will be processed in web service so that it can be more dynamic to change and easy. For example, to count the total donation, the previous work \cite{bravyto} needs to construct a business logic in Javascript manually (see \ref{samplejs})
-
 \begin{figure}[h]
 \centering
 \includegraphics[width=3.5in]{totaldonationjs}
@@ -603,14 +571,14 @@ In the previous study \cite{bravyto} the business logic of the system is impleme
 \end{figure}
 
 
-\section{Case Study: BSMI Charity Organization}
+\section{Case Study: BSMI Charity Organization} \label{casestudy}
 
 %intro BSMI
-BSMI (Bulan Sabit Merah Indonesia) is a charity organization that works to help others in Indonesia. To make it easier for the community to participate in providing assistance through BSMI, BSMI needs a website that can facilitate them in their operations. In this paper, we employ BSMI as a case study to demonstrate the adaptor and its usage. 
+BSMI (Bulan Sabit Merah Indonesia) is a charity organization that works to help others in Indonesia. To make it easier for the community to participate in providing assistance through BSMI, BSMI needs a website to facilitate their operations. In this paper, we employ BSMI as a case study to demonstrate the adaptor and its usage. 
 
-BSMI has many features, but in this paper we focus on using program features, donation features, target features, and donor features only. Program features are activities undertaken by BSMI. Donation features is a donation given by the community for a program. Donor features are people who donate and target features are target of a program. The features that have been selected have some business logic. For example, between the relationship program and donation is for each program is needed to know how many donations associated with the program. Based on these features, the table mapping rules are generated which contains the endpoint and the number of parameters of the selected feature.
+BSMI has many features, but in this paper we focus on \textit{program}, \textit{donation}, \textit{target} and \textit{donor} features. Program feature provides charity activities undertaken by BSMI. Donation is a feature to store donations given by the communities for a charity program. Donor feature is to represent people who donate. Target feature are target of a program. The features have some business logic, for example, to calculate the total donation of a program. 
 
-We adopt the ontology generated from the feature diagram in previous study \cite{bravyto} (see Fig. \ref{fig_ontaisco}). We added a list of rules to run the adaptor (see Fig. \ref{fig_rules}). For example, totalDonation is a rule to calculate the total of donation comes to the BSMI website, the endpoint of web service is "http://54.169.128.6:8080/abs/program/totaldonation", and the total parameter is 1. 
+We adopt the ontology generated from the feature diagram in previous study \cite{bravyto} (see Fig. \ref{fig_ontaisco}). We added a table of rules to run the adaptor (see Fig. \ref{fig_rules}). For example, totalDonation is a rule to calculate the total of donation comes to the BSMI website, the endpoint of web service is "http://54.169.128.6:8080/abs/program/totaldonation", and the total parameter is 1. 
 
 \begin{figure}[!t]
 \centering
@@ -638,7 +606,9 @@ When we open a page containing business logic, it will trigger the adaptor call.
 	\label{view_program}
 \end{figure}
 
-\section{Conclusion}
+\\Andri please provide some example of calling adaptor by other models
+
+\section{Conclusion} \label{conclusion}
 In this paper we have presented an adaptor to integrate ABS Microservices and the ontology implemented in Zotonic-based information system. We explained the implementation process and show a case study in charity organization by adopting ontology from the previous study. The adaptor reads the \textit{rules} related with the ontology as a mapping table to call the web service. The adaptor can be called by the \textit{template engine} and other \textit{models}.
 
 By utilising this adaptor, the business logic required by the information system can be generated automatically without manual development. In addition, the adaptor facilitates dynamic business logic that meets the requirement of the system. Therefore, we can generate several well-structured web pages with different business logics. Furthermore, we can deliver resources of the system into the web service by calling the adaptor from the models. From this scenario, it became apparent that an external global database can be produced since every information system can transfer its resources to the web service. 
@@ -694,10 +664,9 @@ H. H. Wang, Y. F. Li, J. Sun, H. Zhang, and J. Pan, \textit{Verifying feature mo
 B. T. Pangukir, \textit{Pembentukan Otomatis Aplikasi Berbasis Web dengan Masukan Berupa Ontologi: Status Kasus Web BSMI}
 
 \bibitem{absmc}
-M. A. Naily, M. R. A. Setyautami, R. Muschevici, \textit{Development Framework for Microservices-based Software with Software Product Line Approach Using Abstract Behavioral Specification (ABS) Modeling Language}, to appear in Microservices: Science and Engineering Workshop co-located with The 15th International Conference on Software Engineering and Formal Methods, Trento, Italy, September 4-8, 2017. 
+M. A. Naily, M. R. A. Setyautami, R. Muschevici, \textit{A Framework for Modelling Variable Microservices using the Abstract Behavioral Specification Language}, to appear in Microservices: Science and Engineering Workshop co-located with The 15th International Conference on Software Engineering and Formal Methods, Trento, Italy, September 4-8, 2017. 
 
 \end{thebibliography}
-
 
 % that's all folks
 \end{document}
