@@ -406,7 +406,8 @@ Email: ade@cs.ui.ac.id}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Software Product Line (SPL) promises to accelerate the development process with higher quality of product and low budget of production. The essential key of SPL is feature diagram which describes the relation between features for the domain and capture the commonalities and variabilities. The approach gains numerous attention in research and industry area. However, the implementation of SPL approach for information system development is still inadequate. Some works explain the inclusion of ontology for SPL. On the other side, the development of executable modelling language has already begun to model the feature diagram, that is ABS. We propose an adaptor to integrate the ABS microservices and ontology-based information system to produce automatic business logic into the system. This study is implemented with BSMI charity organization as a case study. We show that by using the ontology as its based, the system is semantically structured and the business logic required by the system is updated automatically.
+
 \end{abstract}
 
 % no keywords
@@ -576,25 +577,35 @@ end.
 %intro BSMI
 BSMI (Bulan Sabit Merah Indonesia) is a charity organization that works to help others in Indonesia. To make it easier for the community to participate in providing assistance through BSMI, BSMI needs a website to facilitate their operations. In this paper, we employ BSMI as a case study to demonstrate the adaptor and its usage. 
 
-BSMI has many features, but in this paper we focus on \textit{program}, \textit{donation}, \textit{target} and \textit{donor} features. Program feature provides charity activities undertaken by BSMI. Donation is a feature to store donations given by the communities for a charity program. Donor feature is to represent people who donate. Target feature are target of a program. The features have some business logic, for example, to calculate the total donation of a program. 
+BSMI has many features, but in this paper we focus on \textit{program}, \textit{donation}, \textit{beneficiary} and \textit{donor} features. Program feature provides charity activities undertaken by BSMI. Donation is a feature to store donations given by the communities for a charity program. Donor feature is to represent people who donate. Target feature are target of a program. The features have some business logic, for example, to calculate the total donation of a program. All of the features are represented in OWL Classes (see Fig. \ref{fig_ontaisco}).
 
-We adopt the ontology generated from the feature diagram in previous study \cite{bravyto} (see Fig. \ref{fig_ontaisco}). We added a table of rules to run the adaptor (see Fig. \ref{fig_rules}). For example, totalDonation is a rule to calculate the total of donation comes to the BSMI website, the endpoint of web service is "http://54.169.128.6:8080/abs/program/totaldonation", and the total parameter is 1. 
+We added a table of rules to run the adaptor (see Listing \ref{rulesample}). For example, \textit{totalDonation} is a rule to calculate the total of donation comes to the BSMI website, the endpoint of web service is "http://sites.com/abs/program/totaldonation", and the total parameter is 1 is represented in Listing 
+
+\begin{lstlisting}[caption=Example of table of rules, label = rulesample]
+{
+ "totalDonation" :
+ [
+  "http://sites.com/abs/program/totaldonation":
+   1 
+ ]
+}
+\end{lstlisting}
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=3.5in]{OntologyCO}
+\includegraphics[width=2.5in]{OntologyofCO}
 
-\caption{Part of ontology generated from the feature diagram of charity organization}
+\caption{Part of ontology translated from the feature diagram of charity organization \cite{bravyto}}
 \label{fig_ontaisco}
 \end{figure}
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=3.5in]{Rules}
-
-\caption{Example of Rules}
-\label{fig_rules}
-\end{figure}
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=3.5in]{Rules}
+%
+%\caption{Example of Rules}
+%\label{fig_rules}
+%\end{figure}
 
 When we open a page containing business logic, it will trigger the adaptor. In this example, when opening a page with the category of \textit{Program}, the total donation of that program will be automatically updated as well as when updating the program page. Firstly, we need to create a page of Donation category and input the amount of donation and choose what program the donation is for. We also can create a page containing the donor of donation and who become the beneficiary of the donation. For example, Fig. \ref{view_program} illustrates the program page of "Pelantikan dan Seminar BSMI Brebes" which the total donation is Rp5.030.000 from "Donasi Bpk. Anto untuk Pelantikan Brebes" and "Donasi Pusat untuk Pelantikan Brebes". The donation is distributed for "Dadang" and "Budi". The pages are the representation of instances of the category, or so-called OWL classes that already been translated. 
 
@@ -608,19 +619,16 @@ When we open a page containing business logic, it will trigger the adaptor. In t
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=3.5in]{pagrelation}
+	\includegraphics[width=3.5in]{pagerelation}
 	
 	\caption{Relationship between pages which represents the ontology of Charity Organization}
 	\label{view_program}
 \end{figure}
 
-
-//Andri please provide some example of calling adaptor by other models
-
 \section{Conclusion} \label{conclusion}
 In this paper we have presented an adaptor to integrate ABS Microservices and the ontology implemented in Zotonic-based information system. We explained the implementation process and show a case study in charity organization by adopting ontology from the previous study. The adaptor reads the \textit{rules} related with the ontology as a mapping table to call the web service. The adaptor can be called by the \textit{template engine} and other \textit{models}.
 
-By utilising this adaptor, the business logic required by the information system can be generated automatically without manual development. In addition, the adaptor facilitates dynamic business logic that meets the requirement of the system. Therefore, we can generate several well-structured web pages with different business logics. Furthermore, we can deliver resources of the system into the web service by calling the adaptor from the models. From this scenario, it became apparent that an external global database can be produced since every information system can transfer its resources to the web service. 
+By utilising this adaptor, the business logic required by the information system can be generated automatically without manual development. In addition, the adaptor facilitates dynamic business logic that meets the requirement of the system. Therefore, we can generate several well-structured web pages with different business logics. Furthermore, we can deliver resources of the system into the web service by calling the adaptor from the models. From this scenario, it became apparent that an external global database can be produced since every information system automatically transfers its resources to the external database through the web service. 
 
 \section*{Acknowledgment}
 This work was fully supported by Reliable Software Engineering (RSE) Laboratory, Fasilkom UI and funded by Universitas Indonesia under Hibah PITTA no. 395/UN2.R3.1/HKP.05.00/2017
@@ -656,24 +664,25 @@ This work was fully supported by Reliable Software Engineering (RSE) Laboratory,
 K.~Pohl, G. B\"{o}ckle, and F. Van Der Linden, \textit{Software Product Line Engineering. Foundations, Principles, and Techniques}. Springer, 2005.
 
 \bibitem{ABS}
-E.~B.~Johnsen, R.~H\"{a}hnle, J.~Sch\"{a}fer, R.~Schlatte and M.~Steffen, \textit{ABS: A Core Language for Abstract Behavioral Specification}. Formal Methods for Components and Objects: 9th International Symposium, FMCO 2010, Graz, Austria, November 29 - December 1, 2010. Springer Berlin Heidelberg. Berlin, Heidelberg, 2012. 
+E.~B.~Johnsen, R.~H\"{a}hnle, J.~Sch\"{a}fer, R.~Schlatte and M.~Steffen, "ABS: A Core Language for Abstract Behavioral Specification," in \textit{Formal Methods for Components and Objects: 9th International Symposium}, Graz, Austria, November 29 - December 1, 2010. Springer Berlin Heidelberg. Berlin, Heidelberg, 2012. pp. 142-164.
 
 \bibitem{ABSTutorial}
 R.~H\"{a}hnle. \textit{The abstract behavioral specification language: A tutorial introduction}.
-In Formal Methods for Components and Objects, pages 1–37. Springer, 2013.
+in \textit{Formal Methods for Components and Objects}. Springer, 2013. pp. 1-37.
+
+\bibitem{absmc}
+M. A. Naily, M. R. A. Setyautami, R. Muschevici, "A Framework for Modelling Variable Microservices using the Abstract Behavioral Specification Language", to appear in \textit{Microservices: Science and Engineering Workshop co-located with The 15th International Conference on Software Engineering and Formal Methods}, Trento, Italy, September 4-8, 2017. 
 
 \bibitem{fmontology}
-I. Afriyanti, F.M. Falakh, A. Azurat and B. Takwa, \textit{Feature Model-to-Ontology for SPL Application Realisation}, submitted to The 18th International Conference on Product-Focused Software Process Improvement. URL: \url{https://arxiv.org/abs/1707.02511}
+I. Afriyanti, F.M. Falakh, A. Azurat and B. Takwa, "Feature Model-to-Ontology for SPL Application Realisation", submitted for publication \textit{The 18th International Conference on Product-Focused Software Process Improvement}. Available: \url{https://arxiv.org/abs/1707.02511}
 
 \bibitem{verify}
 H. H. Wang, Y. F. Li, J. Sun, H. Zhang, and J. Pan, \textit{Verifying feature models using OWL}, Web Semantic, vol. 5, no. 2, pp. 117-129, 2007.
 
 
 \bibitem{bravyto}
-B. T. Pangukir, \textit{Pembentukan Otomatis Aplikasi Berbasis Web dengan Masukan Berupa Ontologi: Status Kasus Web BSMI}
+B. T. Pangukir, \textit{Pembentukan Otomatis Aplikasi Berbasis Web dengan Masukan Berupa Ontologi: Status Kasus Web BSMI}, Bachelor final report, Faculty of Computer Science, Universitas Indonesia, Depok, Indonesia, January 2017.
 
-\bibitem{absmc}
-M. A. Naily, M. R. A. Setyautami, R. Muschevici, \textit{A Framework for Modelling Variable Microservices using the Abstract Behavioral Specification Language}, to appear in Microservices: Science and Engineering Workshop co-located with The 15th International Conference on Software Engineering and Formal Methods, Trento, Italy, September 4-8, 2017. 
 
 \end{thebibliography}
 
