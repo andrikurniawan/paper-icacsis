@@ -582,9 +582,9 @@ We adopt the ontology generated from the feature diagram in previous study \cite
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=3.5in]{aisco}
+\includegraphics[width=3.5in]{OntologyCO}
 
-\caption{Ontology generated from the feature diagram of charity organization}
+\caption{Part of ontology generated from the feature diagram of charity organization}
 \label{fig_ontaisco}
 \end{figure}
 
@@ -596,15 +596,24 @@ We adopt the ontology generated from the feature diagram in previous study \cite
 \label{fig_rules}
 \end{figure}
 
-When we open a page containing business logic, it will trigger the adaptor call. In this example, when opening a page with the category of program, total donation of that program will be automatically updated (see Fig. \ref{view_program}). If we create a new donation or delete a donation for this program, total donation in this program will be automatically updated.
+When we open a page containing business logic, it will trigger the adaptor. In this example, when opening a page with the category of \textit{Program}, the total donation of that program will be automatically updated as well as when updating the program page. Firstly, we need to create a page of Donation category and input the amount of donation and choose what program the donation is for. We also can create a page containing the donor of donation and who become the beneficiary of the donation. For example, Fig. \ref{view_program} illustrates the program page of "Pelantikan dan Seminar BSMI Brebes" which the total donation is Rp5.030.000 from "Donasi Bpk. Anto untuk Pelantikan Brebes" and "Donasi Pusat untuk Pelantikan Brebes". The donation is distributed for "Dadang" and "Budi". The pages are the representation of instances of the category, or so-called OWL classes that already been translated. 
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=3.5in]{19-viewProgram}
+	\includegraphics[width=3.5in]{samplepage}
 	
-	\caption{View of "Pelantikan dan Seminar BSMI Brebes" program}
+	\caption{An example of page "Pelantikan dan Seminar BSMI Brebes" program}
 	\label{view_program}
 \end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=3.5in]{pagrelation}
+	
+	\caption{Relationship between pages which represents the ontology of Charity Organization}
+	\label{view_program}
+\end{figure}
+
 
 //Andri please provide some example of calling adaptor by other models
 
