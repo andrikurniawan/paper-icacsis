@@ -331,8 +331,15 @@
 \begin{document}
 \lstset{
   frame=single,
-  language=C,
+  language=Erlang,
   basicstyle=\small,
+  numbers=left,
+  stepnumber=1,
+  showstringspaces=false,
+  tabsize=1,
+  breaklines=true,
+  breakatwhitespace=false,
+  xleftmargin=2em
 }
 
 \makeatletter
@@ -429,7 +436,7 @@ Software Product Line (SPL) gains a huge attention nowadays since it claims that
 
 ABS becomes more promising to solve the problem in the SPL. It is a formal modelling language and executable for distributed object-oriented systems \cite{ABS}\cite{ABSTutorial}. The study of \cite{absmc} is to create a framework to accommodate requirement changes in SPL-based system by realizing ABS Microservices \cite{absmc}. The feature model is implemented into ABS Microservices and results a web service including the required business logic. The web service supports software development that meets the domain of feature model.
 
-In addition, the previous study \cite{fmontology} presents the use of OWL ontology as a feature model representation to produce an application as part of SPL realization. By using such mechanism, it is possible to run inconsistency checking upon the feature model \cite{verify}. The feature model is mapped into \textit{classes} and \textit{object properties} of OWL ontology and can be transformed into Zotonic-based information system; a CMS which adopt pragmatic semantic web for its data model. The approach has already been adopted to automate a charity organization information system in \cite{bravyto}. However, the business logic for the system is still manually developed.
+In addition, the previous study \cite{fmontology} presents the use of OWL ontology as a feature model representation to produce an application as part of SPL realization. By using such mechanism, it is possible to run inconsistency checking upon the feature model \cite{verify}. The feature model is mapped into \textit{classes} and \textit{object properties} of OWL ontology and can be transformed into Zotonic-based information system; a Content Management System (CMS), a computer application that let user to create or modify content, which adopt pragmatic semantic web for its data model. The approach has already been adopted to automate a charity organization information system in \cite{bravyto}. However, the business logic for the system is still manually developed.
 
 Since the web service produced by ABS Microservices provides business logic for the domain related with the feature model and can be retrieved via its web service, we can build an adaptor to integrate the web service resulted by ABS Microservices and the Zotonic-based system with ontology inside. Therefore, in this paper we attempt to develop the adaptor, in such a way the information system is semantically structured and the business logic is automatically developed and meets the requirement .
 
@@ -480,7 +487,7 @@ For this reason, we developed a new model inserted in Zotonic installation folde
 
 However, we specify \texttt{m\_find\_value} to do pattern matching (see Listing \ref{mfindvalue}). When the template engine runs, it automatically generates some commands structured as \texttt{m.abs.functionName[{query param=value}]} and triggers the adaptor to run. For example \texttt{{{m.abs.totalDonation[{query id=id}]}}} means that it calls function \texttt{m\_abs} in the adaptor for \textit{totalDonation} method or \textit{key} and \texttt{{query id=id}} is the data which will be delivered to the web service. Both \textit{key} and \textit{data} are inputs for the parameters in \texttt{m\_find\_value} function.
 
-\begin{lstlisting}[caption=Implementation of m\_find\_value function, label = mfindvalue]
+\begin{lstlisting}[firstnumber=1, caption=Implementation of m\_find\_value function, label = mfindvalue]
 m_find_value({query, Query}, #m{value=Q} =
  _, _Context) when is_list(Q) ->
  [Key] = Q,
@@ -562,14 +569,18 @@ post_page_body(Url, Body) ->
 end.
 \end{lstlisting} 
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=3.5in]{totaldonationjs}
-
-\caption{Total Donation function in Javascript}
-\label{samplejs}
-\end{figure}
-
+\begin{lstlisting}[caption=Total Donation function pseudocode, label=totaldonation]
+predId = []
+total = 0
+for all result where paged.id = id and paged.page = page
+  for id, pred_id in result
+    predId.push(pred_id) if predId.indexOf(pred_id) == -1
+    for amountholder in r.s(m.rsc(pred_id).title).lower
+      total += amountholder.amount if amountholder.amount
+    end for
+  end for
+end for
+\end{lstlisting}
 
 \section{Case Study: BSMI Charity Organization} \label{casestudy}
 
